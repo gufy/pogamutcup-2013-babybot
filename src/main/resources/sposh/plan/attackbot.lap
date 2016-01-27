@@ -1,0 +1,19 @@
+(
+	(C collect-behaviour
+		(elements
+			((need-health (trigger ((com.mathiotic.pogamut.babybot.sposh.Health 50 <=))) com.mathiotic.pogamut.babybot.sposh.PickItems($type="health")))
+			((need-weapon (trigger ((com.mathiotic.pogamut.babybot.sposh.GoodWeapon false ==))) com.mathiotic.pogamut.babybot.sposh.PickItems($type="weapon")))
+			((need-ammo (trigger ((com.mathiotic.pogamut.babybot.sposh.Ammo 20 <=))) com.mathiotic.pogamut.babybot.sposh.PickItems($type="ammo")))
+			((need-anything (trigger ((cz.cuni.amis.pogamut.sposh.executor.Succeed))) com.mathiotic.pogamut.babybot.sposh.PickItems))
+		)
+	)
+	(AP action-pattern (cz.cuni.amis.pogamut.sposh.executor.DoNothing))
+
+	(DC life
+		(drives 
+			  ((fight (trigger ((com.mathiotic.pogamut.babybot.sposh.SenseEnemy) (com.mathiotic.pogamut.babybot.sposh.GoodToFight))) com.mathiotic.pogamut.babybot.sposh.ChaseSensedEnemyAndShoot))
+			  ((gather-items (trigger ((com.mathiotic.pogamut.babybot.sposh.GoodToFight false ==))) collect-behaviour))
+			  ((default com.mathiotic.pogamut.babybot.sposh.RunRandomly))
+		)
+	)
+)
